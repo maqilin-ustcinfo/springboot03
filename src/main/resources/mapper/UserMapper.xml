@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dn.springboot03.mapper.UserMapper" >
+
+    <resultMap id="baseResultMap" type="com.dn.springboot03.entity.User">
+        <id property="id" column="user_id"></id>
+        <result property="name" column="login_name"></result>
+        <result property="password" column="password"></result>
+        <collection property="roleVos" ofType="com.dn.springboot03.entity.RoleVo">
+            <id column="role_id" property="roleId"></id>
+            <result column="role_name" property="roleName"></result>
+            <collection property="perssionSet" ofType="com.dn.springboot03.entity.Perssion">
+                <id column="perssion_id" property="perssionId"></id>
+                <result column="code" property="code"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!--根据ID查询问题-->
+    <select id="getUserByLoginName" parameterType="string" resultMap="baseResultMap">
+       select DISTINCT u.user_id,u.`password`,u.login_name,
+        r.role_id,r.role_name,
+        p.id perssion_id,p.`code` from pm_user u
+        LEFT JOIN user_role ur on u.user_id=ur.user_id
+        LEFT JOIN pm_role r on r.role_id=ur.role_id
+        LEFT JOIN role_permission rp on ur.role_id=rp.role_id
+        LEFT JOIN pm_permission p on rp.perssion_id=p.id
+         where u.login_name=#{loginName}
+    </select>
+
+    
+</mapper>

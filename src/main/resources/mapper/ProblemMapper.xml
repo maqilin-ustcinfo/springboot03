@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dn.springboot03.mapper.ProblemMapper" >
+
+    <resultMap id="baseResultMap" type="com.dn.springboot03.entity.Problem">
+        <id property="id" column="id"></id>
+        <result property="content" column="content"></result>
+        <result property="summary" column="summary"></result>
+    </resultMap>
+
+    <!--根据ID查询问题-->
+    <select id="getProblemById" parameterType="int" resultType="problem">
+        select id,content,summary from problem where id=#{id}
+    </select>
+
+    <!--更新问题-->
+    <update id="updateProblemById" parameterType="problem">
+        update problem set content = #{content},summary=#{summary} where id=#{id}
+    </update>
+    
+</mapper>
