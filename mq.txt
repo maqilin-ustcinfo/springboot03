@@ -1,0 +1,5 @@
+1.消息队列（点对点：轮询接收，发布订阅，请求应答：需要对方回复，点对点的返回模式 ）
+2.应用场景：异步化，解耦，流量的削峰（秒杀），日志处理kafka,消息通信
+3.activeMq,rabbitmq,rocketmq(阿里),kafka（rabbitmq成熟，kafka日志处理）
+4.消息类型：TextMessage,MapMessage,ObjectMessage,BytesMessage,StreamMessage
+5.下载http://activemq.apache.org/activemq-580-release.html地址
